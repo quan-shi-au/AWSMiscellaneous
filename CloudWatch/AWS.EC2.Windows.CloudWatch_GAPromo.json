@@ -1,7 +1,7 @@
 {
     "IsEnabled": true,
     "EngineConfiguration": {
-        "PollInterval": "00:00:15",
+        "PollInterval": "00:00:01",
         "Components": [
             {
                 "Id": "ApplicationEventLog",
@@ -52,8 +52,8 @@
                 "Id": "CustomLogs",
                 "FullName": "AWS.EC2.Windows.CloudWatch.CustomLog.CustomLogInputComponent,AWS.EC2.Windows.CloudWatch",
                 "Parameters": {
-                    "LogDirectoryPath": "C:\\CustomLogs\\",
-                    "TimestampFormat": "MM/dd/yyyy HH:mm:ss",
+                    "LogDirectoryPath": "C:\\inetpub\\wwwroot\\WontokOne_GA_PAY\\nlog\\",
+                    "TimestampFormat": "yyyy-MM-dd HH:mm:ss",
                     "Encoding": "UTF-8",
                     "Filter": "",
                     "CultureName": "en-US",
@@ -74,14 +74,36 @@
                 }
             },
             {
-                "Id": "CloudWatchLogs",
+                "Id": "ApplicationEventSink",
                 "FullName": "AWS.EC2.Windows.CloudWatch.CloudWatchLogsOutput,AWS.EC2.Windows.CloudWatch",
                 "Parameters": {
                     "AccessKey": "",
                     "SecretKey": "",
                     "Region": "ap-southeast-2",
                     "LogGroup": "WontokONE-GA-Promo-ASG-ApplicationLogs-FCQSRQ5ULVR",
-                    "LogStream": "{instance_id}"
+                    "LogStream": "{instance_id}/ApplicationEvent"
+                }
+            },
+            {
+                "Id": "SystemEventSink",
+                "FullName": "AWS.EC2.Windows.CloudWatch.CloudWatchLogsOutput,AWS.EC2.Windows.CloudWatch",
+                "Parameters": {
+                    "AccessKey": "",
+                    "SecretKey": "",
+                    "Region": "ap-southeast-2",
+                    "LogGroup": "WontokONE-GA-Promo-ASG-ApplicationLogs-FCQSRQ5ULVR",
+                    "LogStream": "{instance_id}/SystemEvent"
+                }
+            },
+            {
+                "Id": "CustomEventSink",
+                "FullName": "AWS.EC2.Windows.CloudWatch.CloudWatchLogsOutput,AWS.EC2.Windows.CloudWatch",
+                "Parameters": {
+                    "AccessKey": "",
+                    "SecretKey": "",
+                    "Region": "ap-southeast-2",
+                    "LogGroup": "WontokONE-GA-Promo-ASG-ApplicationLogs-FCQSRQ5ULVR",
+                    "LogStream": "{instance_id}/CustomEvent"
                 }
             },
             {
@@ -99,7 +121,9 @@
         "Flows": {
             "Flows": 
             [
-                "(ApplicationEventLog,SystemEventLog),CloudWatchLogs",
+                "ApplicationEventLog,ApplicationEventSink",
+                "SystemEventLog,SystemEventSink",
+                "CustomLogs,CustomEventSink",
                 "PerformanceCounter,CloudWatch"
             ]
         }
