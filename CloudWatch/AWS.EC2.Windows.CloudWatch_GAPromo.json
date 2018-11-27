@@ -52,7 +52,7 @@
                 "Id": "CustomLogs",
                 "FullName": "AWS.EC2.Windows.CloudWatch.CustomLog.CustomLogInputComponent,AWS.EC2.Windows.CloudWatch",
                 "Parameters": {
-                    "LogDirectoryPath": "C:\\inetpub\\wwwroot\\WontokOne_GA_PAY\\nlog\\",
+                    "LogDirectoryPath": "C:\\inetpub\\wwwroot\\WontokOne_GA_Promo\\nlog\\",
                     "TimestampFormat": "yyyy-MM-dd HH:mm:ss",
                     "Encoding": "UTF-8",
                     "Filter": "",
